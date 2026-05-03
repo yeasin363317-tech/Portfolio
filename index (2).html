@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yeasin Arafat — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0f;
+  --paper:#f5f2ec;
+  --warm:#e8e0d0;
+  --accent:#e85d26;
+  --text:#1a1610;
+  --muted:#7a6f60;
+  --card:#ffffff;
+  --border:#d4ccbe;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--warm)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 5rem;
+  background:rgba(245,242,236,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  z-index:100;
+  animation:slideDown .7s ease both;
+}
+.nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.03em;display:flex;align-items:center;gap:.4rem}
+.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:breathe 2.5s ease infinite}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-hire{font-family:'JetBrains Mono',monospace;font-size:.73rem;background:var(--accent);color:#fff;padding:.5rem 1.2rem;border-radius:3px;text-decoration:none;font-weight:500;transition:background .2s,transform .15s}
+.nav-hire:hover{background:#c94d18;transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5rem 4rem;gap:4rem;position:relative}
+.hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:var(--warm);z-index:0}
+.hero-left{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.8rem;animation:fadeUp .7s ease .1s both}
+.hero-eyebrow::before{content:'//';opacity:.4}
+.hero-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(3.2rem,6vw,5.8rem);line-height:.95;letter-spacing:-.04em;color:var(--text);animation:fadeUp .7s ease .2s both}
+.hero-name em{font-style:normal;color:var(--accent);display:block}
+.hero-name .outline{-webkit-text-stroke:2px var(--text);color:transparent;display:block}
+.hero-role{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--muted);margin-top:1.5rem;display:flex;align-items:center;gap:.75rem;animation:fadeUp .7s ease .35s both}
+.hero-role::before{content:'';flex-shrink:0;width:40px;height:1px;background:var(--muted)}
+.hero-desc{font-size:1rem;line-height:1.75;color:var(--muted);max-width:480px;margin-top:1.5rem;animation:fadeUp .7s ease .45s both}
+.hero-actions{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;animation:fadeUp .7s ease .55s both}
+.btn-fill{display:inline-flex;align-items:center;gap:.5rem;background:var(--text);color:var(--paper);padding:.85rem 1.8rem;border-radius:3px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.9rem;text-decoration:none;transition:background .2s,transform .15s}
+.btn-fill:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;border:1.5px solid var(--border);color:var(--text);padding:.85rem 1.8rem;border-radius:3px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,color .2s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* HERO PHOTO */
+.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;animation:fadeLeft .9s ease .3s both}
+.photo-frame{position:relative;width:100%;max-width:440px}
+.photo-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:4px 4px 0 0;display:block;filter:grayscale(10%)}
+.photo-tag{position:absolute;bottom:4.5rem;left:-2rem;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.5rem 1rem;border-radius:3px;letter-spacing:.08em;box-shadow:4px 4px 0 var(--text)}
+.photo-num{position:absolute;top:1.5rem;right:-1.5rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.06em;writing-mode:vertical-rl}
+.hero-stats{display:flex;background:var(--text);color:var(--paper);border-radius:0 0 4px 4px}
+.h-stat{flex:1;padding:1.2rem 1.5rem;border-right:1px solid rgba(255,255,255,.1)}
+.h-stat:last-child{border-right:none}
+.h-stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1}
+.h-stat-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.4);letter-spacing:.08em;margin-top:.25rem;text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:6rem 5rem;position:relative}
+.sec-head{margin-bottom:3.5rem}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;margin-bottom:.5rem}
+.sec-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.sec-line{width:50px;height:3px;background:var(--accent);margin-top:1rem;border-radius:2px}
+
+/* ABOUT */
+.about{background:var(--ink);color:var(--paper)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center;max-width:1200px;margin:0 auto}
+.about .sec-title{color:var(--paper)}
+.about .sec-num{color:var(--accent)}
+.about-bio{font-size:.95rem;line-height:1.9;color:rgba(255,255,255,.55);margin-bottom:2rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12);padding:.3rem .75rem;border-radius:2px;background:rgba(255,255,255,.04);transition:all .2s}
+.tag:hover{color:var(--accent);border-color:var(--accent)}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:1;object-fit:cover;object-position:top;border-radius:4px;filter:grayscale(20%) contrast(1.05);border:1px solid rgba(255,255,255,.08)}
+.about-img-accent{position:absolute;bottom:-16px;right:-16px;width:60%;height:60%;border:2px solid var(--accent);border-radius:4px;z-index:-1}
+
+/* SKILLS */
+.skills-bg{background:var(--warm)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;max-width:1200px}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.8rem;transition:all .25s;position:relative;overflow:hidden}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.skill-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.skill-card:hover::after{transform:scaleX(1)}
+.sk-icon{font-size:1.6rem;margin-bottom:1rem}
+.sk-name{font-weight:700;font-size:1rem;margin-bottom:.5rem;letter-spacing:-.01em}
+.sk-list{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--muted);line-height:1.8}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;max-width:1200px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:var(--accent)}
+.proj-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+.proj-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.proj-tag{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--accent);background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.2);padding:.2rem .55rem;border-radius:2px}
+.proj-title{font-weight:700;font-size:1.05rem;margin-bottom:.5rem;letter-spacing:-.01em}
+.proj-desc{font-size:.83rem;color:var(--muted);line-height:1.7;flex:1;margin-bottom:1.2rem}
+.proj-links{display:flex;gap:1rem}
+.proj-link{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.3rem;transition:color .2s}
+.proj-link:hover{color:var(--accent)}
+
+/* EXPERIENCE */
+.exp-bg{background:var(--warm)}
+.exp-wrap{max-width:780px}
+.exp-item{display:flex;gap:2.5rem;padding-bottom:3rem;position:relative}
+.exp-item:not(:last-child)::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:1px;background:var(--border)}
+.exp-dot{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:var(--card);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:.9rem;position:relative;z-index:1}
+.exp-box{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.4rem;flex:1;transition:border-color .2s}
+.exp-box:hover{border-color:var(--accent)}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem}
+.exp-role{font-weight:700;font-size:.97rem}
+.exp-period{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);background:rgba(232,93,38,.08);border:1px solid rgba(232,93,38,.2);padding:.2rem .6rem;border-radius:2px;white-space:nowrap}
+.exp-co{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--muted);margin-bottom:.7rem}
+.exp-desc{font-size:.83rem;color:var(--muted);line-height:1.7}
+
+/* CONTACT */
+.contact-inner{max-width:1100px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;margin-top:3rem}
+.contact-big{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.0;margin-bottom:1.5rem}
+.contact-big span{color:var(--accent)}
+.contact-email-btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--accent);color:#fff;padding:1rem 2rem;border-radius:3px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:4px 4px 0 var(--text);transition:transform .15s,box-shadow .15s;margin-top:1rem}
+.contact-email-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--text)}
+.contact-email-small{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:1rem;display:flex;align-items:center;gap:.5rem}
+.contact-email-small a{color:var(--accent);text-decoration:none}
+
+/* SOCIALS */
+.social-title{font-weight:700;font-size:1.1rem;margin-bottom:1.3rem}
+.social-list{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.social-item{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--warm);border:1px solid var(--border);border-radius:4px;text-decoration:none;color:var(--text);transition:all .2s}
+.social-item:hover{background:var(--text);color:var(--paper);border-color:var(--text);transform:translateX(6px)}
+.social-item:hover .social-arrow{color:var(--accent)}
+.si-icon{width:36px;height:36px;border-radius:6px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;transition:background .2s}
+.social-item:hover .si-icon{background:rgba(255,255,255,.1)}
+.si-name{font-weight:600;font-size:.88rem}
+.si-handle{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted)}
+.social-item:hover .si-handle{color:rgba(255,255,255,.5)}
+.social-arrow{margin-left:auto;font-size:.9rem;color:var(--muted);transition:color .2s}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-weight:800;font-size:1.1rem;color:var(--paper);letter-spacing:-.02em}
+.footer-logo span{color:var(--accent)}
+.footer-mono{font-family:'JetBrains Mono',monospace;font-size:.7rem}
+.footer-avail{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.7rem}
+.avail-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:breathe 2s ease infinite}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s ease,transform .65s ease}
+.reveal-l.in{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal-r.in{opacity:1;transform:none}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+@media(max-width:1024px){
+  nav{padding:1.1rem 2rem}
+  .hero{padding:7rem 2rem 3rem;grid-template-columns:1fr;gap:3rem}
+  .hero::before{display:none}
+  section{padding:5rem 2rem}
+  footer{padding:2rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .social-list{grid-template-columns:1fr}
+}
+@media(max-width:768px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><span class="nav-logo-dot"></span>Yeasin Arafat</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#experience">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-hire" href="mailto:yeasin.dev.bd@gmail.com">Hire Me →</a>
+</nav>
+
+<div class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Full-Stack Developer</div>
+    <h1 class="hero-name">
+      <span>Developer</span>
+      <em>Yeasin</em>
+      <span class="outline">Arafat</span>
+    </h1>
+    <div class="hero-role">Building for the web</div>
+    <p class="hero-desc">Crafting fast, clean, and thoughtful digital products — from pixel-perfect interfaces to scalable backend systems. Based in Bangladesh, working worldwide.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-fill">View My Work</a>
+      <a href="#contact" class="btn-outline">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <span class="photo-num">01 / PORTRAIT</span>
+      <img src="yeasin.png" alt="Yeasin Arafat"/>
+      <div class="photo-tag">Available for hire</div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="h-stat-num">2+</div><div class="h-stat-label">Years Exp.</div></div>
+        <div class="h-stat"><div class="h-stat-num">20+</div><div class="h-stat-label">Projects</div></div>
+        <div class="h-stat"><div class="h-stat-num">10+</div><div class="h-stat-label">Clients</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal-l">
+      <img class="about-img" src="yeasin.png" alt="Yeasin Arafat"/>
+      <div class="about-img-accent"></div>
+    </div>
+    <div class="reveal-r">
+      <div class="sec-head">
+        <div class="sec-num">// 01 — About</div>
+        <h2 class="sec-title">Who I Am</h2>
+        <div class="sec-line"></div>
+      </div>
+      <p class="about-bio">Hey, I'm Yeasin Arafat — a passionate full-stack developer from Bangladesh who loves turning ideas into polished, real-world applications. I care deeply about clean code, great user experience, and building things that actually work.</p>
+      <p class="about-bio">I specialize in JavaScript ecosystems across the stack — from crafting sleek React interfaces to architecting Node.js backends. When I'm not coding, I'm exploring new tools, writing about tech, and contributing to the developer community.</p>
+      <div class="about-tags">
+        <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">REST API</span><span class="tag">GraphQL</span><span class="tag">Tailwind CSS</span><span class="tag">Redis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills-bg" id="skills">
+  <div class="sec-head reveal">
+    <div class="sec-num">// 02 — Skills</div>
+    <h2 class="sec-title">What I Build With</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal"><div class="sk-icon">⚡</div><div class="sk-name">Frontend</div><div class="sk-list">React · Next.js · TypeScript<br/>Tailwind CSS · Redux · HTML5</div></div>
+    <div class="skill-card reveal"><div class="sk-icon">🔧</div><div class="sk-name">Backend</div><div class="sk-list">Node.js · Express · REST API<br/>GraphQL · JWT · WebSockets</div></div>
+    <div class="skill-card reveal"><div class="sk-icon">🗄️</div><div class="sk-name">Database</div><div class="sk-list">MongoDB · PostgreSQL · MySQL<br/>Redis · Mongoose · Prisma</div></div>
+    <div class="skill-card reveal"><div class="sk-icon">🚀</div><div class="sk-name">DevOps</div><div class="sk-list">Docker · Git · GitHub Actions<br/>Vercel · Netlify · Linux</div></div>
+    <div class="skill-card reveal"><div class="sk-icon">📱</div><div class="sk-name">Mobile</div><div class="sk-list">React Native · Expo<br/>Responsive Design · PWA</div></div>
+    <div class="skill-card reveal"><div class="sk-icon">🎨</div><div class="sk-name">Design</div><div class="sk-list">Figma · UI/UX · Design Systems<br/>Prototyping · Wireframing</div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head reveal">
+    <div class="sec-num">// 03 — Work</div>
+    <h2 class="sec-title">Featured Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#fef3ec,#f9d9c8)">🛒</div>
+      <div class="proj-body">
+        <div class="proj-stack"><span class="proj-tag">React</span><span class="proj-tag">Node.js</span><span class="proj-tag">MongoDB</span></div>
+        <div class="proj-title">E-Commerce Platform</div>
+        <div class="proj-desc">Full-stack shopping platform with auth, product management, cart & Stripe payment integration.</div>
+        <div class="proj-links"><a class="proj-link" href="#">↗ Live Demo</a><a class="proj-link" href="#">⌥ GitHub</a></div>
+      </div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#ecf5f0,#c8e8d8)">📋</div>
+      <div class="proj-body">
+        <div class="proj-stack"><span class="proj-tag">Next.js</span><span class="proj-tag">TypeScript</span><span class="proj-tag">PostgreSQL</span></div>
+        <div class="proj-title">Task Management App</div>
+        <div class="proj-desc">Collaborative project tool with real-time updates, drag-and-drop kanban and role-based access.</div>
+        <div class="proj-links"><a class="proj-link" href="#">↗ Live Demo</a><a class="proj-link" href="#">⌥ GitHub</a></div>
+      </div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#ecf0f5,#c8d8e8)">💬</div>
+      <div class="proj-body">
+        <div class="proj-stack"><span class="proj-tag">React</span><span class="proj-tag">Socket.io</span><span class="proj-tag">Express</span></div>
+        <div class="proj-title">Real-time Chat App</div>
+        <div class="proj-desc">Instant messaging with rooms, private messages, online presence and file sharing capabilities.</div>
+        <div class="proj-links"><a class="proj-link" href="#">↗ Live Demo</a><a class="proj-link" href="#">⌥ GitHub</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="exp-bg" id="experience">
+  <div class="sec-head reveal">
+    <div class="sec-num">// 04 — Journey</div>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="exp-wrap">
+    <div class="exp-item reveal">
+      <div class="exp-dot">💼</div>
+      <div class="exp-box">
+        <div class="exp-top"><span class="exp-role">Full-Stack Developer</span><span class="exp-period">2024 — Present</span></div>
+        <div class="exp-co">Freelance / Remote</div>
+        <div class="exp-desc">Building full-stack web apps for clients. Handling architecture, development, deployment, and ongoing maintenance end-to-end.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-dot">🚀</div>
+      <div class="exp-box">
+        <div class="exp-top"><span class="exp-role">Frontend Developer</span><span class="exp-period">2023 — 2024</span></div>
+        <div class="exp-co">Tech Startup · Bangladesh</div>
+        <div class="exp-desc">Developed React UI components and improved page performance by 40% through code optimization.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-dot">🎓</div>
+      <div class="exp-box">
+        <div class="exp-top"><span class="exp-role">Junior Web Developer</span><span class="exp-period">2022 — 2023</span></div>
+        <div class="exp-co">Software Agency · Bangladesh</div>
+        <div class="exp-desc">Started professional journey building landing pages and learning full-stack fundamentals in a collaborative team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="sec-num">// 05 — Contact</div>
+        <div class="contact-big">Let's build<br/>something<br/><span>great.</span></div>
+        <a class="contact-email-btn" href="mailto:yeasin.dev.bd@gmail.com">Send me an email ↗</a>
+        <div class="contact-email-small">Or reach me at <a href="mailto:yeasin.dev.bd@gmail.com">yeasin.dev.bd@gmail.com</a></div>
+      </div>
+      <div class="reveal">
+        <div class="social-title">Find me online</div>
+        <div class="social-list">
+          <a class="social-item" href="https://github.com/yeasin-arafat" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+            <div><div class="si-name">GitHub</div><div class="si-handle">@yeasin-arafat</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://linkedin.com/in/yeasin-dev-bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0077B5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+            <div><div class="si-name">LinkedIn</div><div class="si-handle">yeasin-arafat</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://facebook.com/yeasin.dev.bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+            <div><div class="si-name">Facebook</div><div class="si-handle">yeasin.dev.bd</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://twitter.com/yeasin3p" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.843L1.548 2.25h6.857l4.263 5.633zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+            <div><div class="si-name">X (Twitter)</div><div class="si-handle">@yeasin3p</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://instagram.com/yeasin.dev.bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="url(#ig2)"><defs><linearGradient id="ig2" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+            <div><div class="si-name">Instagram</div><div class="si-handle">yeasin.dev.bd</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://tiktok.com/@yeasin.9111" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1 1.46 1.05 2.68 2.5 2.71 1.16.03 2.35-.61 2.87-1.63.14-.3.2-.62.21-.95.05-3.6.02-7.2.03-10.81z"/></svg></div>
+            <div><div class="si-name">TikTok</div><div class="si-handle">yeasin.9111</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://reddit.com/user/yeasin_dev_bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FF4500"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.05l-2.454-.546-.748 3.51a4.27 4.27 0 0 1 1.715.4c1.051-.735 2.211-.96 3.161-.634.95.326 1.614 1.126 1.614 2.115 0 1.701-1.944 3.085-4.341 3.085-2.397 0-4.341-1.384-4.341-3.085 0-.911.558-1.7 1.435-2.22l.534-2.511-3.238.721a1.249 1.249 0 1 1-.413-.679l3.864-.861.884-4.156a1.25 1.25 0 0 1 2.327-.149zm-8.23 11.19c.65 0 1.176.526 1.176 1.176s-.526 1.176-1.176 1.176-1.176-.526-1.176-1.176.526-1.176 1.176-1.176zm6.44 0c.65 0 1.176.526 1.176 1.176s-.526 1.176-1.176 1.176-1.176-.526-1.176-1.176.526-1.176 1.176-1.176zm-3.22 3.103c-1.332 0-2.422-.48-2.907-1.196a.222.222 0 1 1 .356-.265c.381.513 1.254.912 2.551.912s2.17-.399 2.551-.912a.222.222 0 1 1 .356.265c-.485.716-1.575 1.196-2.907 1.196z"/></svg></div>
+            <div><div class="si-name">Reddit</div><div class="si-handle">yeasin_dev_bd</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://threads.net/@yeadin.dev.bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24c-6.627 0-12-5.373-12-12s5.373-12 12-12 12 5.373 12 12-5.373 12-12 12zm0-2c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm0-15c2.761 0 5 2.239 5 5v2c0 2.209-1.791 4-4 4s-4-1.791-4-4v-2c0-2.761 2.239-5 5-5zm0 2c-1.657 0-3 1.343-3 3v2c0 1.105.895 2 2 2s2-.895 2-2v-2c0-1.657-1.343-3-3-3z"/></svg></div>
+            <div><div class="si-name">Threads</div><div class="si-handle">@yeadin.dev.bd</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+          <a class="social-item" href="https://pinterest.com/Yeasin_Dev_Bd" target="_blank" rel="noopener">
+            <div class="si-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E60023"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.966 1.406-5.966s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.261 7.929-7.261 4.162 0 7.398 2.967 7.398 6.93 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg></div>
+            <div><div class="si-name">Pinterest</div><div class="si-handle">Yeasin_Dev_Bd</div></div>
+            <span class="social-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Yeasin<span>.</span></div>
+  <div class="footer-mono">© 2026 Yeasin Arafat · Made in Bangladesh 🇧🇩</div>
+  <div class="footer-avail"><span class="avail-dot"></span>Open to work</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
